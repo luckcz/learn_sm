@@ -1,0 +1,28 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 加载映射文件 -->
+	<mappers>
+		<mapper resource="mapper/UserMapper.xml"/>
+		<mapper resource="mapper/DeptMapper.xml"/>
+	</mappers>
+</configuration>
+
+<!-- 
+7.4.1.<mapper resource=" " />
+使用相对于类路径的资源（现在的使用方式）
+如：<mapper resource="sqlmap/User.xml" />
+
+7.4.2.<mapper class=" " />
+使用mapper接口类路径
+如：<mapper class="cn.itcast.mybatis.mapper.UserMapper"/>
+
+注意：此种方法要求mapper接口名称和mapper映射文件名称相同，且放在同一个目录中。
+
+7.4.3.<package name=""/>
+注册指定包下的所有mapper接口
+如：<package name="cn.itcast.mybatis.mapper"/>
+注意：此种方法要求mapper接口名称和mapper映射文件名称相同，且放在同一个目录中。
+ -->

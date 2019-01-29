@@ -1,0 +1,45 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaicom.origin.dao.DeptDao">
+	<resultMap type="com.kaicom.bean.DeptBean" id="resultMap">
+		<id column="id" property="id"/>
+		<result column="deptNo" property="deptNo"/>
+		<result column="deptName" property="deptName"/>
+		<result column="deptMainManager" property="deptMainManager"/>
+		<result column="phone" property="phone"/>
+		<result column="oDate" property="oDate"/>
+		<collection property="list" javaType="list" ofType="com.kaicom.bean.UserBean">
+			<id column="user_id" property="id"/>
+			<result column="userNo" property="userNo"/>
+			<result column="userName" property="userName"/>
+			<result column="loginName" property="loginName"/>
+			<result column="password" property="password"/>
+			<result column="deptNo" property="deptNo"/>
+		</collection>
+	</resultMap>
+	
+	<resultMap type="com.kaicom.bean.DeptBean" id="resultMapUnoin">
+		<id column="id" property="id"/>
+		<result column="deptNo" property="deptNo"/>
+		<result column="deptName" property="deptName"/>
+		<result column="deptMainManager" property="deptMainManager"/>
+		<result column="phone" property="phone"/>
+		<result column="oDate" property="oDate"/>
+		<collection property="list" javaType="list" ofType="com.kaicom.bean.UserBean" select="listUserByDeptNo" column="deptNo">
+		</collection>
+	</resultMap>
+	
+	<select id="listDept1" resultMap="resultMap">
+		select b.*,a.id as user_id,a.userNo,a.userName,a.loginName,a.password,a.deptNo from dept b left join user a on a.deptNo = b.deptNo
+	</select>
+	
+	<select id="listDept2" resultMap="resultMapUnoin">
+		select * from dept
+	</select>
+	
+	<select id="listUserByDeptNo" parameterType="String" resultType="com.kaicom.bean.UserBean">
+		select * from user where deptNo = #{value}
+	</select>
+</mapper>
